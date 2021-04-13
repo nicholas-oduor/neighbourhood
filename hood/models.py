@@ -110,3 +110,19 @@ class Profile (models.Model):
         self.save
     def delete_profile(self):
         self.delete()
+
+class Business(models.Model):
+    business_name = models.CharField(max_length=250)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    business_profile = CloudinaryField('Profile pic', null=True, blank=True)
+    neighbourhood = models.ForeignKey(Neighbourhood,on_delete=models.CASCADE)
+    business_email = models.CharField(max_length=30)
+    
+    def __str__(self):
+        return f'{self.business_name} business'
+    
+    def save_business(self):
+        self.save()
+        
+    def delete_business(self):
+        self.delete()
