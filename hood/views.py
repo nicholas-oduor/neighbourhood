@@ -66,3 +66,14 @@ class IsAssigned(permissions.BasePermission):
         if obj.assigned_to == request.user: 
             return True
         return False
+
+class IsReadOnlyOrIsAuthenticated(permissions.BasePermission):
+    def has_permission(self, request, view):
+        authenticated = request.user.is_authenticated
+        if not authenticated:
+            if view.action == '/':
+                return True
+            else:
+                return False
+        else:
+            return True
