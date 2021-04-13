@@ -28,3 +28,31 @@ def home(request):
     # print("Results..", posts)
     heading = "Welcome to Neighborhood application"
     return render(request, "home.html", {"hoods":hood, "business":business,"posts":posts, "heading":heading})
+
+class NeighbourhoodViewSet(viewsets.ModelViewSet):
+    """
+    A viewset for viewing and editing neighborhood instances.
+    """
+    serializer_class = NeighbourhoodSerializer
+    queryset = Neighbourhood.objects.all()
+    
+class ProfileViewSet(viewsets.ModelViewSet):
+    """
+    A viewset for viewing and editing profile instances.
+    """
+    serializer_class = ProfileSerializer
+    queryset = Profile.objects.all()
+    
+class BusinessViewSet(viewsets.ModelViewSet):
+    """
+    A viewset for viewing and editing profile instances.
+    """
+    serializer_class = BusinessSerializer
+    queryset = Business.objects.all()
+
+class PostViewSet(viewsets.ModelViewSet):
+    """
+    A viewset for viewing and editing profile instances.
+    """
+    serializer_class = PostSerializer
+    queryset = Post.objects.all()
