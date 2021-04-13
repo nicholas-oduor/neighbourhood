@@ -77,3 +77,11 @@ class IsReadOnlyOrIsAuthenticated(permissions.BasePermission):
                 return False
         else:
             return True
+
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    A viewset for viewing and editing user instances.
+    """
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+    permission_classes = permissions.IsAuthenticated
