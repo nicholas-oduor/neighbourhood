@@ -80,3 +80,19 @@ class User(AbstractBaseUser, PermissionsMixin):
         Sends an email to this User.
         '''
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+class Neighbourhood(models.Model):
+    name = models.CharField(max_length=250)
+    location = models.CharField(max_length=250)
+    occupantsCount = models.IntegerField(default=0)
+    image = CloudinaryField('Profile pic', null=True, blank=True)
+    admin = models.ForeignKey(User,on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f'{self.name} neighbourhood'
+    
+    def save_neighborhood(self):
+        self.save()
+        
+    def delete_neighborhood(self):
+        self.delete()
