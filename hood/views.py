@@ -56,3 +56,13 @@ class PostViewSet(viewsets.ModelViewSet):
     """
     serializer_class = PostSerializer
     queryset = Post.objects.all()
+
+class IsAssigned(permissions.BasePermission): 
+    """
+    Only person who is assigned has the permission
+    """
+    def has_object_permission(self, request, view, obj):
+		# check if user who launched request is object owner 
+        if obj.assigned_to == request.user: 
+            return True
+        return False
